@@ -1,0 +1,77 @@
+cabal-version: 1.12
+
+-- This file has been generated from package.yaml by hpack version 0.33.0.
+--
+-- see: https://github.com/sol/hpack
+--
+-- hash: f29e260aa7898020f25d8aa14d54d3f4cc062f3009703681b5d506e3734f15b3
+
+name:           aoc2020
+version:        0.1.0.0
+description:    Please see the README on GitHub at <https://github.com/aaronallen8455/aoc2020#readme>
+homepage:       https://github.com/aaronallen8455/aoc2020#readme
+bug-reports:    https://github.com/aaronallen8455/aoc2020/issues
+author:         Aaron Allen
+maintainer:     aaronallen8455@gmail.com
+copyright:      2020 Aaron Allen
+license:        BSD3
+license-file:   LICENSE
+build-type:     Simple
+extra-source-files:
+    README.md
+    ChangeLog.md
+
+source-repository head
+  type: git
+  location: https://github.com/aaronallen8455/aoc2020
+
+library
+  exposed-modules:
+      One
+  other-modules:
+      Paths_aoc2020
+  hs-source-dirs:
+      src
+  build-depends:
+      base >=4.7 && <5
+    , bytestring
+    , containers
+    , mtl
+    , transformers
+    , vector
+  default-language: Haskell2010
+
+executable aoc2020-exe
+  main-is: Main.hs
+  other-modules:
+      Paths_aoc2020
+  hs-source-dirs:
+      app
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+      aoc2020
+    , base >=4.7 && <5
+    , bytestring
+    , containers
+    , mtl
+    , transformers
+    , vector
+  default-language: Haskell2010
+
+test-suite aoc2020-test
+  type: exitcode-stdio-1.0
+  main-is: Spec.hs
+  other-modules:
+      Paths_aoc2020
+  hs-source-dirs:
+      test
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+      aoc2020
+    , base >=4.7 && <5
+    , bytestring
+    , containers
+    , mtl
+    , transformers
+    , vector
+  default-language: Haskell2010
