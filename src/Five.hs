@@ -17,14 +17,14 @@ seatId bs = row * 8 + col where
   (r, c) = BS.splitAt 7 bs
 
 getRow :: BS.ByteString -> Int
-getRow = (`div` 2) . BS.foldl' go 0 where
+getRow = BS.foldl' go 0 where
   go acc 'F' = acc * 2
-  go acc 'B' = (acc + 1) * 2
+  go acc 'B' = (acc * 2) + 1
 
 getCol :: BS.ByteString -> Int
-getCol = (`div` 2) . BS.foldl' go 0 where
+getCol = BS.foldl' go 0 where
   go acc 'L' = acc * 2
-  go acc 'R' = (acc + 1) * 2
+  go acc 'R' = (acc * 2) + 1
 
 day5B :: BS.ByteString -> BS.ByteString
 day5B = maybe "no answer!" (BS.pack . show . pred . fst)
