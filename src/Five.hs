@@ -1,4 +1,3 @@
-{-# LANGUAGE OverloadedStrings #-}
 module Five
   ( day5A
   , day5B

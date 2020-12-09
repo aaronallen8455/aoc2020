@@ -1,4 +1,3 @@
-{-# LANGUAGE OverloadedStrings #-}
 module Six
   ( day6A
   , day6B

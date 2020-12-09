@@ -1,4 +1,3 @@
-{-# LANGUAGE OverloadedStrings #-}
 module Two
   ( day2A
   , day2B

@@ -1,4 +1,3 @@
-{-# LANGUAGE OverloadedStrings #-}
 module One where
 
 import           Control.Applicative

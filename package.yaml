@@ -28,6 +28,9 @@ dependencies:
 - transformers
 - vector
 
+default-extensions:
+- OverloadedStrings
+
 library:
   source-dirs: src
 

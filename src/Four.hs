@@ -1,4 +1,3 @@
-{-# LANGUAGE OverloadedStrings #-}
 module Four
   ( day4A
   , day4B
