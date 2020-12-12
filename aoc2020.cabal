@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 02980088a68cde597608fe287e24989391d3e5c8df2207a08de4455773adc3f4
+-- hash: 9f326fbe7ce01fc2d70d384e38660939ef03230ba8ea1fd5d0eb93fa9ae471f3
 
 name:           aoc2020
 version:        0.1.0.0
@@ -28,6 +28,7 @@ source-repository head
 library
   exposed-modules:
       Eight
+      Eleven
       Five
       Four
       Nine
@@ -44,8 +45,10 @@ library
       src
   default-extensions: OverloadedStrings
   build-depends:
-      base >=4.7 && <5
+      array
+    , base >=4.7 && <5
     , bytestring
+    , comonad
     , containers
     , megaparsec
     , mtl
@@ -63,8 +66,10 @@ executable aoc2020-exe
   ghc-options: -rtsopts -O2
   build-depends:
       aoc2020
+    , array
     , base >=4.7 && <5
     , bytestring
+    , comonad
     , containers
     , megaparsec
     , mtl
