@@ -15,12 +15,13 @@ import           Nine
 import           Ten
 import           Eleven
 import           Twelve
+import           Thirteen
 
 main :: IO ()
 main = do
-  day:_ <- getArgs
+  day:c:_ <- getArgs
 
-  BS.interact $ case day of
+  BS.interact $ case day <> c of
     "1a" -> day1A
     "1b" -> day1B
     "2a" -> day2A
@@ -45,6 +46,8 @@ main = do
     "11b" -> day11B
     "12a" -> day12A
     "12b" -> day12B
+    "13a" -> day13A
+    "13b" -> day13B
 
   putStrLn ""
   putStrLn "--------------------------------------------------------------------------------"
