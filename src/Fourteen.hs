@@ -1,4 +1,3 @@
-{-# LANGUAGE DeriveFoldable #-}
 module Fourteen
   ( day14A
   , day14B
@@ -61,22 +60,25 @@ applyMaskB mask v = foldl' go v ([35, 34 ..] `zip` mask) where
   go x (i, 'X') = clearBit x i
 
 -- better performance using a binary tree instead of IntMap
-data Tree a = Nil | Leaf !a | Node !(Tree a) !(Tree a)
-  deriving (Foldable)
+data Tree a = Nil | Leaf !a | DoubleNode !(Tree a) | Node !(Tree a) !(Tree a)
 
 mapLeft :: (Tree a -> Tree a) -> Tree a -> Tree a
 mapLeft f Nil = Node (f Nil) Nil
 mapLeft f (Node l r) = Node (f l) r
+mapLeft f (DoubleNode t) = Node (f t) t
 
 mapRight :: (Tree a -> Tree a) -> Tree a -> Tree a
 mapRight f Nil = Node Nil (f Nil)
 mapRight f (Node l r) = Node l (f r)
+mapRight f (DoubleNode t) = Node t (f t)
 
 mapBoth :: (Tree a -> Tree a) -> Tree a -> Tree a
-mapBoth f = mapLeft f . mapRight f
+mapBoth f Nil = DoubleNode (f Nil)
+mapBoth f (DoubleNode t) = DoubleNode (f t)
+mapBoth f t = mapLeft f $ mapRight f t
 
 solveBTree :: [Line] -> Int
-solveBTree = sum . fst . foldl' go (Nil, "") where
+solveBTree = sumTree . fst . foldl' go (Nil, "") where
   go (mem, _) (Mask m) = (mem, reverse m)
   go (mem, mask) (Write n v) = (insertTree mask n v mem, mask)
 
@@ -92,3 +94,11 @@ insertTree ('1':mask) k v t =
 insertTree ('X':mask) k v t =
   mapBoth (insertTree mask (div k 2) v) t
 
+sumTree :: Tree Int -> Int
+sumTree (DoubleNode t) = 2 * force (sumTree t)
+sumTree (Leaf x) = x
+sumTree (Node l r) = force (sumTree l) + force (sumTree r)
+sumTree Nil = 0
+
+force :: a -> a
+force = join seq
