@@ -17,6 +17,7 @@ import           Eleven
 import           Twelve
 import           Thirteen
 import           Fourteen
+import           Fifteen
 
 main :: IO ()
 main = do
@@ -51,6 +52,8 @@ main = do
     "13b" -> day13B
     "14a" -> day14A
     "14b" -> day14B
+    "15a" -> day15A
+    "15b" -> day15B
 
   putStrLn ""
   putStrLn "--------------------------------------------------------------------------------"

@@ -95,10 +95,7 @@ insertTree ('X':mask) k v t =
   mapBoth (insertTree mask (div k 2) v) t
 
 sumTree :: Tree Int -> Int
-sumTree (DoubleNode t) = 2 * force (sumTree t)
+sumTree (DoubleNode t) = 2 * sumTree t
 sumTree (Leaf x) = x
-sumTree (Node l r) = force (sumTree l) + force (sumTree r)
+sumTree (Node l r) = sumTree l + sumTree r
 sumTree Nil = 0
-
-force :: a -> a
-force = join seq

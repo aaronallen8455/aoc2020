@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: a75bdc2c9f3d9be83a04cbffbaef7ad1a28345cf96dbef983333b6eed3934532
+-- hash: f1abf928015a84d981d4ee9514815a2be07695db73f814083c42e85bafd3c64f
 
 name:           aoc2020
 version:        0.1.0.0
@@ -29,6 +29,7 @@ library
   exposed-modules:
       Eight
       Eleven
+      Fifteen
       Five
       Four
       Fourteen
