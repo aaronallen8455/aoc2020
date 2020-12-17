@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: f1abf928015a84d981d4ee9514815a2be07695db73f814083c42e85bafd3c64f
+-- hash: ca545c1da7d0e1c00d4578d13b1e0eb0c6435b35e3e966789bf5515a108735b0
 
 name:           aoc2020
 version:        0.1.0.0
@@ -37,6 +37,7 @@ library
       One
       Seven
       Six
+      Sixteen
       SymList
       Ten
       Thirteen
