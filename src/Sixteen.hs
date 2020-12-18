@@ -10,7 +10,6 @@ import qualified Data.Map.Strict as M
 import           Data.Maybe
 import           Data.Monoid
 import qualified Data.Set as S
-import           Data.Tuple
 import qualified Data.Vector as V
 
 data Rule =
@@ -74,7 +73,7 @@ assignFields rules tickets = findMatching . map (map name)
     go x = filter (`applyRule` x)
 
 findMatching :: [[BS.ByteString]] -> [BS.ByteString]
-findMatching groups = maybe [] (map snd . sort . map swap . M.toList)
+findMatching groups = maybe [] (map fst . sortOn snd . M.toList)
                     $ foldM go M.empty [0 .. V.length v - 1]
   where
   v = V.fromList groups
@@ -86,8 +85,6 @@ findMatching groups = maybe [] (map snd . sort . map swap . M.toList)
       , let possibles = v V.! ci
             m' = M.insert k i m
             visited' = S.insert k visited
-      = msum $ do
-          p <- possibles
-          pure $ assign visited' ci p m'
+      = msum [ assign visited' ci p m' | p <- possibles ]
       | otherwise = Just $ M.insert k i m
 
