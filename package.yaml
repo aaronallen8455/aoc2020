@@ -27,6 +27,7 @@ dependencies:
 - containers
 - megaparsec
 - mtl
+- parsec
 - transformers
 - vector
 
