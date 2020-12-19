@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 7a572990e7c762355430f03428233edda8fac8c986b8d04ff569f3f732d8de4c
+-- hash: 35b6ed7545fce4cd82a20d9e3c67b2f3f395e7eafd59c19f94b9cc1fc4a337d9
 
 name:           aoc2020
 version:        0.1.0.0
@@ -35,6 +35,7 @@ library
       Four
       Fourteen
       Nine
+      Nineteen
       One
       Seven
       Seventeen
