@@ -34,3 +34,17 @@ initSL (xs, [y]) = (us, reverse vs) where
 initSL (xs, ys)
   | null ys = ([], [])
   | otherwise = (xs, tail ys)
+
+unconsSL :: SymList a -> Maybe (a, SymList a)
+unconsSL ([],[]) = Nothing
+unconsSL l@(x:xs, ys) = Just (x, tailSL l)
+
+lengthSL :: SymList a -> Int
+lengthSL (xs, ys) = length xs + length ys
+
+takeSL :: Int -> SymList a -> SymList a
+takeSL 0 xs = ([], [])
+takeSL n xs =
+  case unconsSL xs of
+    Nothing -> ([],[])
+    Just (x,xs) -> x <| takeSL (n-1) xs
