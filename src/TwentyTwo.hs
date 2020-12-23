@@ -1,5 +1,8 @@
 {-# LANGUAGE BangPatterns #-}
-module TwentyTwo where
+module TwentyTwo
+  ( day22A
+  , day22B
+  ) where
 
 import qualified Data.ByteString.Char8 as BS
 import           Data.Bitraversable
