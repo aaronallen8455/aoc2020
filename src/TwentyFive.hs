@@ -1,33 +1,47 @@
-{-# LANGUAGE BangPatterns #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
 module TwentyFive
   ( day25A
   ) where
 
+import           Control.Monad
 import qualified Data.ByteString.Char8 as BS
 import           Data.List
+import           Data.Maybe
+import           Data.Semigroup
+import qualified Data.IntMap as IM
 
 day25A :: BS.ByteString -> BS.ByteString
 day25A = maybe "invalid input" (BS.pack . show . solveA . map fst)
        . traverse BS.readInt . BS.lines
 
 solveA :: [Int] -> Int
-solveA [c, d] = fastExp d cLoop
-  where cLoop = findLoopSize c
+solveA [c, d] = unModExp $ stimes cLoop (ModExp d)
+  where cLoop = discreteLog 7 c
 
-fastExp :: Int -> Int -> Int
-fastExp _ 0 = 1
-fastExp x !e
-  | even e = let p = fastExp x (e `div` 2) in mo $! p * p
-  | otherwise = mo $! x * fastExp x (e - 1)
+newtype ModExp = ModExp { unModExp :: Int }
+  deriving (Show, Num)
+
+instance Semigroup ModExp where
+  ModExp a <> ModExp b = ModExp . mo $! a * b
 
 mo :: Int -> Int
-mo = flip mod 20201227
+mo = flip mod m
 
--- modular multiplicative inverse
-inv :: Int -> Int
-inv x = fastExp x 20201225
+m :: Int
+m = 20201227
 
-findLoopSize :: Int -> Int
-findLoopSize = succ . length . takeWhile (/= 7)
-             . iterate' (mo . (*) (inv 7))
+-- giant step baby step algorithm
+-- (https://www.geeksforgeeks.org/discrete-logarithm-find-integer-k-ak-congruent-modulo-b/)
+discreteLog :: Int -> Int -> Int
+discreteLog a b = head rhs where
+  n = ceiling (sqrt $ fromIntegral m)
+  an = stimes n (ModExp a)
+  lhs = IM.fromList . reverse . take n . (`zip` [1..]) . fmap unModExp
+      $ iterate' (<> an) an
+  rhs = mapMaybe match . zip [0..] $ iterate' (<> ModExp a) (ModExp b)
+  match (i, ModExp x) = do
+    y <- lhs IM.!? x
+    let res = y * n - i
+    guard $ res < m
+    pure res
 
